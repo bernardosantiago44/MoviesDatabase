@@ -1,4 +1,5 @@
 #include "Playable.h"
+#include "Episode.h"
 
 #ifndef SERIES_H
 #define SERIES_H
@@ -9,6 +10,7 @@ class Series: public Playable {
   private:
   float calculateRating() override;
   unsigned int numberOfSeasons;
+  vector<Episode> episodes;
 
   public:
   void displayInformation() override;

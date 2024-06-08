@@ -8,16 +8,10 @@ using namespace std;
 int main() {
   vector<Movie> movies;
   vector<Series> series;
+  vector<Episode> episodes;
+
   Database database("./");
 
-  movies = database.readMovies();
-  series = database.readSeries();
-
-  // for (Movie movie : movies) {
-  //   movie.displayInformation();
-  // }
-
-  for (Series serie : series) {
-    serie.displayInformation();
-  }
+  database.displayMovies();
+  database.displaySeries();
 }

@@ -1,6 +1,7 @@
+#include <iostream>
 #include "Movie.h"
 #include "Series.h"
-#include <iostream>
+#include "Episode.h"
 
 using namespace std;
 
@@ -10,11 +11,18 @@ using namespace std;
 class Database {
 private:
   string directory;
+  vector<Movie> movies;
+  vector<Series> series;
+  vector<Episode> episodes;
 
 public: 
   Database(string directory);
-  vector<Movie> readMovies();
-  vector<Series> readSeries();
+  void readMovies();
+  void readSeries();
+  void readEpisodes();
+
+  void displayMovies();
+  void displaySeries();
 };
 
 #endif
