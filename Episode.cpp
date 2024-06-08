@@ -1,6 +1,7 @@
 #include "Episode.h"
 
-Episode::Episode(string id, string title, string genre, int duration, unsigned short int season) {
+Episode::Episode(string id, string title, string genre, int duration,
+                 unsigned short int season) {
   this->id = id;
   this->title = title;
   this->genre = genre;
@@ -8,9 +9,7 @@ Episode::Episode(string id, string title, string genre, int duration, unsigned s
   this->season = season;
 }
 
-Episode::Episode() {
-  Episode("0", "Unknown", "Unknown", 0, -1);
-}
+Episode::Episode() { Episode("0", "Unknown", "Unknown", 0, -1); }
 
 float Episode::calculateRating() {
   float rating = 0;
@@ -30,3 +29,5 @@ void Episode::displayInformation() {
   cout << "--- Duration: " << this->duration << " min." << endl;
   cout << "--- Rating: " << this->calculateRating() << "/5\n" << endl;
 }
+
+Episode::~Episode() {}
