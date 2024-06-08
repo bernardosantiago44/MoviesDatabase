@@ -6,11 +6,18 @@
 using namespace std;
 
 int main() {
-  vector<Movie> playables;
+  vector<Movie> movies;
+  vector<Series> series;
   Database database("./");
 
-  playables = database.readMovies();
-  for (Movie movie : playables) {
-    movie.displayInformation();
+  movies = database.readMovies();
+  series = database.readSeries();
+
+  // for (Movie movie : movies) {
+  //   movie.displayInformation();
+  // }
+
+  for (Series serie : series) {
+    serie.displayInformation();
   }
 }

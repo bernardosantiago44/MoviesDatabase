@@ -1,4 +1,5 @@
 #include "Movie.h"
+#include "Series.h"
 #include <iostream>
 
 using namespace std;
@@ -13,6 +14,7 @@ private:
 public: 
   Database(string directory);
   vector<Movie> readMovies();
+  vector<Series> readSeries();
 };
 
 #endif

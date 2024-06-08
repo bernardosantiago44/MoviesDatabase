@@ -8,10 +8,13 @@ using namespace std;
 class Series: public Playable {
   private:
   float calculateRating() override;
+  unsigned int numberOfSeasons;
 
   public:
   void displayInformation() override;
-  Series(string id, string title, string genre);
+  void setNumberOfSeasons(unsigned int numberOfSeasons);
+  Series(string id, string title, string genre, 
+         unsigned int numberOfSeasons);
   Series();
   virtual ~Series();
 };

@@ -1,0 +1,10 @@
+1;Breaking Bad;Crime, Drama, Thriller;5;4,2,1,3,5,2
+2;Game of Thrones;Action, Adventure, Drama;8;1,5,3,4,2,5
+3;Stranger Things;Drama, Fantasy, Horror;4;3,1,4,2,5,1
+4;The Office;Comedy;9;5,4,2,1,3,3
+5;Friends;Comedy, Romance;10;2,3,5,4,1,2
+6;The Mandalorian;Action, Adventure, Fantasy;3;1,2,3,5,4,3
+7;Sherlock;Crime, Drama, Mystery;4;4,3,1,2,5,1
+8;The Crown;Biography, Drama, History;6;2,5,4,3,1,4
+9;The Witcher;Action, Adventure, Drama;3;3,1,5,2,4,5
+10;The Simpsons;Animation, Comedy;34;5,4,3,1,2,2

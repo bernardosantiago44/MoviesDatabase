@@ -23,7 +23,7 @@ Movie::Movie(string id, string title, string genre, int duration) {
   this->title = title;
   this->genre = genre;
   this->duration = duration;
-  this->ratings = {3, 4, 3, 5, 4, 4};
+  this->ratings = {};
 }
 
 Movie::Movie() { Movie("0", "Unknown", "Unknown", 0); }
