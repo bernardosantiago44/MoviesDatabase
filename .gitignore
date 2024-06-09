@@ -30,3 +30,11 @@
 *.exe
 *.out
 *.app
+main
+
+#Blob files (Replit)
+.blob
+.ccls-cache
+
+#VS Code
+.vscode
