@@ -19,3 +19,7 @@ void Playable::setDuration(float duration) {
 void Playable::addRating(int rating) {
   this->ratings.push_back(rating);
 }
+
+string Playable::getTitle() {
+  return this->title;
+}

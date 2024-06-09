@@ -6,12 +6,9 @@
 using namespace std;
 
 int main() {
-  vector<Movie> movies;
-  vector<Series> series;
-  vector<Episode> episodes;
 
   Database database("./");
 
-  database.displayMovies();
+  //database.displayMovies();
   database.displaySeries();
 }

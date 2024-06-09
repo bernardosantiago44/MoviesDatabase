@@ -9,10 +9,19 @@ Database::Database(string directory) {
   this->readEpisodes();
 }
 
+bool Database::movieExists(string title) {
+  return movies.find(title) != movies.end();
+}
+
+bool Database::seriesExists(string title) {
+  return series.find(title) != series.end();
+}
+
 void Database::readMovies() {
   movies.clear();
   ifstream file(this->directory + "movies.txt");
   string line; // Will change over the columns
+  string title; // for constructing the map
   const char colDelimeter = ';';
   const char ratingDelimeter = ',';
 
@@ -24,8 +33,8 @@ void Database::readMovies() {
     getline(ss, lineItem, colDelimeter); // reading the id
     movie.setID(lineItem);
 
-    getline(ss, lineItem, colDelimeter); // reading the title
-    movie.setTitle(lineItem);
+    getline(ss, title, colDelimeter); // reading the title
+    movie.setTitle(title);
 
     getline(ss, lineItem, colDelimeter); // reading the genre
     movie.setGenre(lineItem);
@@ -39,7 +48,7 @@ void Database::readMovies() {
     while (getline(ratingStream, rating, ratingDelimeter)) {
       movie.addRating(stoi(rating));
     }
-    movies.push_back(movie);
+    movies.emplace(title, movie);
   }
   file.close();
 }
@@ -48,6 +57,7 @@ void Database::readSeries() {
   series.clear();
   ifstream file(this->directory + "series.txt");
   string line; // Will change over the columns
+  string title; // For the series map
   const char colDelimeter = ';';
   const char ratingDelimeter = ',';
 
@@ -59,8 +69,8 @@ void Database::readSeries() {
     getline(ss, lineItem, colDelimeter); // reading the id
     serie.setID(lineItem);
 
-    getline(ss, lineItem, colDelimeter); // reading the title
-    serie.setTitle(lineItem);
+    getline(ss, title, colDelimeter); // reading the title
+    serie.setTitle(title);
 
     getline(ss, lineItem, colDelimeter); // reading the genre
     serie.setGenre(lineItem);
@@ -74,13 +84,12 @@ void Database::readSeries() {
     while (getline(ratingStream, rating, ratingDelimeter)) {
       serie.addRating(stoi(rating));
     }
-    series.push_back(serie);
+    series.emplace(title, serie);
   }
   file.close();
 }
 
 void Database::readEpisodes() {
-  episodes.clear();
   ifstream file(this->directory + "episodes.txt");
   string line; // Will change over the columns
   const char colDelimeter = ';';
@@ -89,13 +98,14 @@ void Database::readEpisodes() {
   while (getline(file, line)) {
     stringstream ss(line);
     string lineItem; // store the current line
+    string seriesName; // for using in the dictionary
     Episode episode; // construct the read episode
 
     getline(ss, lineItem, colDelimeter); // reading the id
     episode.setID(lineItem);
 
-    getline(ss, lineItem, colDelimeter); // reading the series id
-    episode.setSeriesID(stoi(lineItem));
+    getline(ss, seriesName, colDelimeter); // reading the series name
+    episode.setSeriesName(seriesName);
 
     getline(ss, lineItem, colDelimeter); // reading the title
     episode.setTitle(lineItem);
@@ -112,22 +122,29 @@ void Database::readEpisodes() {
     while (getline(ratingStream, rating, ratingDelimeter)) {
       episode.addRating(stoi(rating));
     }
-    episodes.push_back(episode);
+    if (!seriesExists(seriesName)) {
+      throw runtime_error("The series " + seriesName + " does not exist.");
+    }
+    // serie must exist at this point
+    EpisodesDict& seriesEpisodes = series.at(seriesName).getEpisodes();
+    cout << endl;
+
+    seriesEpisodes.emplace(episode.getTitle(), episode);
   }
   file.close();
 }
 
 void Database::displayMovies() {
   cout << "------ Movies ------" << endl;
-  for (Movie movie : movies) {
-    movie.displayInformation();
+  for (auto& movie : movies) {
+    movie.second.displayInformation();
   }
 }
 
 void Database::displaySeries() {
   cout << "------ Series ------" << endl;
-  for (Series serie : series) {
-    serie.displayInformation();
+  for (auto& serie : series) {
+    serie.second.displayInformation();
   }
 }
 

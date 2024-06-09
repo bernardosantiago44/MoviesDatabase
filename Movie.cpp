@@ -18,6 +18,7 @@ void Movie::displayInformation() {
   cout << "--- Rating: " << this->calculateRating() << "/5\n" << endl;
 }
 
+
 Movie::Movie(string id, string title, string genre, int duration) {
   this->id = id;
   this->title = title;

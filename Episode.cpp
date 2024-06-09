@@ -1,16 +1,16 @@
 #include "Episode.h"
 
-Episode::Episode(string id, unsigned short int seriesID,
+Episode::Episode(string id, string seriesName,
                  string title, int duration, unsigned short int season) {
   this->id = id;
-  this->seriesID = seriesID;
+  this->seriesName = seriesName;
   this->title = title;
   this->duration = duration;
   this->season = season;
   this->genre = "Unknown";
 }
 
-Episode::Episode() { Episode("0", 0, "Unknown", 0, 0); }
+Episode::Episode() { Episode("0", "0", "Unknown", 0, 0); }
 
 float Episode::calculateRating() {
   float rating = 0;
@@ -22,26 +22,20 @@ float Episode::calculateRating() {
   return rating / size;
 }
 
-void Episode::setSeriesID(unsigned int seriesID) {
-  this->seriesID = seriesID;
+void Episode::setSeriesName(string name) {
+  this->seriesName = name;
 }
 
 void Episode::setSeason(unsigned int season) {
   this->season = season;
 }
 
-string Episode::getSeriesTitle() {
-  return "Series title goes here";
-  // return this->seriesTitle;
-}
-
 void Episode::displayInformation() {
   cout.precision(2);
-  cout << "Episode title: " << this->title << endl;
-  cout << "--- Series: " << this->getSeriesTitle() << endl;
-  cout << "--- Season " << this->season << endl;
-  cout << "--- Duration: " << this->duration << " min." << endl;
-  cout << "--- Rating: " << this->calculateRating() << "/5\n" << endl;
+  cout << "\tEpisode title: " << this->title << endl;
+  cout << "\t\t--- Season " << this->season << endl;
+  cout << "\t\t--- Duration: " << this->duration << " min." << endl;
+  cout << "\t\t--- Rating: " << this->calculateRating() << "/5\n" << endl;
 }
 
 Episode::~Episode() {}
