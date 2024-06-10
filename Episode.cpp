@@ -12,16 +12,6 @@ Episode::Episode(string id, string seriesName,
 
 Episode::Episode() { Episode("0", "0", "Unknown", 0, 0); }
 
-float Episode::calculateRating() {
-  float rating = 0;
-  const int size = this->ratings.size();
-
-  for (int i : this->ratings) {
-    rating += i;
-  }
-  return rating / size;
-}
-
 void Episode::setSeriesName(string name) {
   this->seriesName = name;
 }

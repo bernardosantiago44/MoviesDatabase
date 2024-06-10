@@ -1,15 +1,5 @@
 #include "Movie.h"
 
-float Movie::calculateRating() {
-  float rating = 0;
-  const int size = this->ratings.size();
-
-  for (int i : this->ratings) {
-    rating += i;
-  }
-  return rating / size;
-}
-
 void Movie::displayInformation() {
   cout.precision(2);
   cout << "Title: " << this->title << endl;

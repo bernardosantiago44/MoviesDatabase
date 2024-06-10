@@ -12,7 +12,7 @@ protected:
   int duration;
   vector<int> ratings;
 
-  virtual float calculateRating() = 0;
+  float calculateRating();
 
 public:
   virtual void displayInformation() { cout << "Display information" << endl; }
