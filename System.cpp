@@ -19,9 +19,27 @@ void System::displayMenu() {
 int System::getInputFromUser() {
     string input = "-1";
 
-    cout << "Enter your choice (1 - 7): ";
-    cin >> input;
-    cout << "Current option " << input << endl;
+    while (true) {
+        cout << "Enter your choice (1 - 7): ";
+        cin >> input;
+
+        // Check if the input is a number
+        try {
+            stoi(input);
+        } catch (invalid_argument e) {
+            cout << "Hey, that's not a number. Please try again.\n";
+            continue;
+        }
+
+        // Check if the number is within the range
+        if (stoi(input) < 1 || stoi(input) > 7) {
+            cout << "Invalid input. Please try again.\n";
+            continue;
+        }
+        break;
+    }
+
+    cout << "\n\n";
     
     return stoi(input);
 }
