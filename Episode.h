@@ -6,7 +6,6 @@ using namespace std;
 
 class Episode: public Playable {
   private:
-  float calculateRating() override;
   unsigned short int season;
   string seriesName;
   

@@ -6,11 +6,9 @@
 using namespace std;
 
 int main() {
-  vector<Movie> playables;
+
   Database database("./");
 
-  playables = database.readMovies();
-  for (Movie movie : playables) {
-    movie.displayInformation();
-  }
+  //database.displayMovies();
+  database.displaySeries();
 }

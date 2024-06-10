@@ -1,15 +1,5 @@
 #include "Series.h"
 
-float Series::calculateRating() {
-    float rating = 0;
-    const int size = this->ratings.size();
-
-    for (int i : this->ratings) {
-        rating += i;
-    }
-    return rating / size;
-}
-
 void Series::displayInformation() {
     const string title = "Title: " + this->title + " (" + this->id + ")";
     cout.precision(2);
