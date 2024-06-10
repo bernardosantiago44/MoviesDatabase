@@ -9,6 +9,8 @@ System::System() {
     // in the same order of appearance as the menu
     functions[0] = &Database::displayMovies; // Pointer to the function displayMovies
     functions[1] = &Database::displaySeries; // Pointer to the function displaySeries
+    functions[2] = &Database::searchMovie; // Pointer to the function searchMovie
+    functions[3] = &Database::searchSeries; // Pointer to the function searchSeries
 
     database->readMovies();
     database->readSeries();

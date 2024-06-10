@@ -21,6 +21,8 @@ private:
   bool movieExists(string title);
   bool seriesExists(string title);
 
+  string askForInput(string message);
+
 public:
   Database(string directory);
   void readMovies();
@@ -29,6 +31,8 @@ public:
 
   void displayMovies();
   void displaySeries();
+  void searchMovie();
+  void searchSeries();
 };
 
 #endif
