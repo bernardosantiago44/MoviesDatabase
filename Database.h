@@ -1,6 +1,7 @@
 #include "Episode.h"
 #include "Movie.h"
 #include "Series.h"
+#include "System.h"
 #include <iostream>
 #include <unordered_map>
 
@@ -20,8 +21,6 @@ private:
 
   bool movieExists(string title);
   bool seriesExists(string title);
-
-  string askForInput(string message);
 
 public:
   Database(string directory);

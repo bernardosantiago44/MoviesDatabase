@@ -150,7 +150,7 @@ void Database::displaySeries() {
 
 void Database::searchMovie() {
   // Read the title from the user
-  string title = askForInput("Enter the title of the movie: ");
+  string title = System::askForInput("Enter the title of the movie: ");
 
   if (!movieExists(title)) {
     cout << "The movie " << title << " does not exist." << endl;
@@ -161,20 +161,11 @@ void Database::searchMovie() {
 
 void Database::searchSeries() {
   // Read the title from the user
-  string title = askForInput("Enter the title of the series: ");
+  string title = System::askForInput("Enter the title of the series: ");
 
   if (!seriesExists(title)) {
     cout << "The series " << title << " does not exist." << endl;
     return;
   }
   series.at(title).displayInformation();
-}
-
-string Database::askForInput(string message) {
-  string input;
-  cout << message;
-  cin.ignore(); // Ignore any previous newline character
-  getline(cin >> ws, input); // Read the entire line
-
-  return input;
 }

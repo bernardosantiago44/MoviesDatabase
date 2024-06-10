@@ -1,7 +1,10 @@
+#pragma once
+
 #include <iostream>
 #include "Database.h"
 
 using namespace std;
+
 
 class System {
 private:
@@ -12,10 +15,11 @@ private:
     // Array of void-function pointers to the Database class
     void (Database::*functions[7])();
 
-    int getInputFromUser();
-
 public:
     void displayMenu(); 
     void run();
+
+    static int askForInput(int from, int to);
+    static string askForInput(string message);
     System();
 };

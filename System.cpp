@@ -1,4 +1,5 @@
 #include "System.h"
+#include "Database.h"
 
 System::System() {
     // Initialize the system with reading the 
@@ -21,11 +22,12 @@ void System::displayMenu() {
     cout << MAIN_MENU << endl;
 }
 
-int System::getInputFromUser() {
+int System::askForInput(int from, int to) {
     string input = "-1";
 
     while (true) {
-        cout << "Enter your choice (1 - 7): ";
+        // Enter your choice (from - to)
+        cout << "Enter your choice (" << from << " - " << to << "): ";
         cin >> input;
 
         // Check if the input is a number
@@ -37,7 +39,7 @@ int System::getInputFromUser() {
         }
 
         // Check if the number is within the range
-        if (stoi(input) < 1 || stoi(input) > 7) {
+        if (stoi(input) < from || stoi(input) > to) {
             cout << "Invalid input. Please try again.\n";
             continue;
         }
@@ -49,12 +51,21 @@ int System::getInputFromUser() {
     return stoi(input);
 }
 
+string System::askForInput(string message) {
+    string input;
+    cout << message;
+    cin.ignore(); // Ignore any previous newline character
+    getline(cin, input);
+    return input;
+}
+
 void System::run() {
     int input = -1;
 
     while (true) {
         displayMenu();
-        input = getInputFromUser();
+        // ask for numeric input from 1 to 7
+        input = askForInput(1, 7);
 
         if (input == 7) {
             cout << "Thank you for using the program.\n";
