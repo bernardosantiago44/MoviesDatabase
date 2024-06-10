@@ -5,8 +5,10 @@ System::System() {
     // movies and series from the database file
     database = new Database("./");
 
-    functions[0] = &Database::displayMovies;
-    functions[1] = &Database::displaySeries;
+    // Initialize the array of function pointers
+    // in the same order of appearance as the menu
+    functions[0] = &Database::displayMovies; // Pointer to the function displayMovies
+    functions[1] = &Database::displaySeries; // Pointer to the function displaySeries
 
     database->readMovies();
     database->readSeries();
