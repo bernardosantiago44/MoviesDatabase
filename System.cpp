@@ -5,7 +5,8 @@ System::System() {
     // movies and series from the database file
     database = new Database("./");
 
-    functions[1] = &Database::displayMovies;
+    functions[0] = &Database::displayMovies;
+    functions[1] = &Database::displaySeries;
 
     database->readMovies();
     database->readSeries();
@@ -18,16 +19,10 @@ void System::displayMenu() {
 int System::getInputFromUser() {
     string input = "-1";
 
-    while (true) {
-        cout << "Enter your choice (1 - 7): ";
-        cin >> input;
-        
-        if (stoi(input) >= 1 && stoi(input) <= 7) {
-            break;
-        } else {
-            cout << "Invalid option.\n";
-        }
-    }
+    cout << "Enter your choice (1 - 7): ";
+    cin >> input;
+    cout << "Current option " << input << endl;
+    
     return stoi(input);
 }
 
@@ -43,7 +38,9 @@ void System::run() {
             break;
         }
 
-        functions[0];
+        if (this->database != nullptr) {
+            (this->database->*functions[input - 1])();
+        }
     }
 }
 
