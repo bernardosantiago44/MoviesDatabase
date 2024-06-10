@@ -10,7 +10,6 @@ using EpisodesDict = unordered_map<string, Episode>;
 
 class Series: public Playable {
   private:
-  float calculateRating() override;
   unsigned int numberOfSeasons;
   EpisodesDict episodes;
   void displayEpisodesList(int maxCount);

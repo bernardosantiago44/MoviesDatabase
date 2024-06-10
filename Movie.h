@@ -5,7 +5,6 @@
 
 class Movie: public Playable {
   private:
-  float calculateRating() override;
 
   public:
   void displayInformation() override;

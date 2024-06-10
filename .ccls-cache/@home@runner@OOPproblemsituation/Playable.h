@@ -22,6 +22,8 @@ public:
   void setGenre(string genre);
   void setDuration(float duration);
   void addRating(int rating);
+
+  string getTitle();
 };
 
 #endif
