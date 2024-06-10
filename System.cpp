@@ -10,6 +10,7 @@ System::System() {
 
     database->readMovies();
     database->readSeries();
+    database->readEpisodes();
 }
 
 void System::displayMenu() {
