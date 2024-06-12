@@ -202,9 +202,9 @@ void Database::rateSeries(){
   this->series.at(title).addRating(rating);
 }
 void Database::rateEpisode(){
-  sring title_series = System::askForInput("Enter the title of the series the episode is from: ");
-  if(!seriesExists(title)){
-    cout << "The series " << title << " does not exist." << endl << endl;
+  string title_series = System::askForInput("Enter the title of the series the episode is from: ");
+  if(!seriesExists(title_series)){
+    cout << "The series " << title_series << " does not exist." << endl << endl;
     return;
   }
   string title_episode = System::askForInput("Enter the title of the episode: ");
