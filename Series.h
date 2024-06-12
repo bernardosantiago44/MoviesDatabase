@@ -15,6 +15,8 @@ class Series: public Playable {
   void displayEpisodesList(int maxCount);
 
   public:
+  bool episodeExists(string name);
+  void rateEpisode(string name, int rating);
   void displayInformation() override;
   void setNumberOfSeasons(unsigned int numberOfSeasons);
   EpisodesDict& getEpisodes();
