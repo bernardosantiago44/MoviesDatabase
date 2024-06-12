@@ -1,14 +1,11 @@
 #include <iostream>
 #include <vector>
-#include "Movie.h"
-#include "Database.h"
+#include "System.h"
 
 using namespace std;
 
 int main() {
+    System system;
 
-  Database database("./");
-
-  //database.displayMovies();
-  database.displaySeries();
+    system.run();
 }

@@ -2,8 +2,8 @@
 #include <fstream>
 #include <sstream>
 
-Database::Database(string directory) { 
-  this->directory = directory; 
+Database::Database(string directory) {
+  this->directory = directory;
   this->readMovies();
   this->readSeries();
   this->readEpisodes();
@@ -20,7 +20,7 @@ bool Database::seriesExists(string title) {
 void Database::readMovies() {
   movies.clear();
   ifstream file(this->directory + "movies.txt");
-  string line; // Will change over the columns
+  string line;  // Will change over the columns
   string title; // for constructing the map
   const char colDelimeter = ';';
   const char ratingDelimeter = ',';
@@ -28,7 +28,7 @@ void Database::readMovies() {
   while (getline(file, line)) {
     stringstream ss(line);
     string lineItem; // store the current line
-    Movie movie; // construct the read movie
+    Movie movie;     // construct the read movie
 
     getline(ss, lineItem, colDelimeter); // reading the id
     movie.setID(lineItem);
@@ -43,7 +43,7 @@ void Database::readMovies() {
     movie.setDuration(stof(lineItem));
 
     getline(ss, lineItem, colDelimeter); // reading the line of the ratings
-    stringstream ratingStream(lineItem); // create 
+    stringstream ratingStream(lineItem); // create
     string rating;
     while (getline(ratingStream, rating, ratingDelimeter)) {
       movie.addRating(stoi(rating));
@@ -56,7 +56,7 @@ void Database::readMovies() {
 void Database::readSeries() {
   series.clear();
   ifstream file(this->directory + "series.txt");
-  string line; // Will change over the columns
+  string line;  // Will change over the columns
   string title; // For the series map
   const char colDelimeter = ';';
   const char ratingDelimeter = ',';
@@ -64,7 +64,7 @@ void Database::readSeries() {
   while (getline(file, line)) {
     stringstream ss(line);
     string lineItem; // store the current line
-    Series serie; // construct the read series
+    Series serie;    // construct the read series
 
     getline(ss, lineItem, colDelimeter); // reading the id
     serie.setID(lineItem);
@@ -79,7 +79,7 @@ void Database::readSeries() {
     serie.setNumberOfSeasons(stoi(lineItem));
 
     getline(ss, lineItem, colDelimeter); // reading the line of the ratings
-    stringstream ratingStream(lineItem); // create 
+    stringstream ratingStream(lineItem); // create
     string rating;
     while (getline(ratingStream, rating, ratingDelimeter)) {
       serie.addRating(stoi(rating));
@@ -97,9 +97,9 @@ void Database::readEpisodes() {
 
   while (getline(file, line)) {
     stringstream ss(line);
-    string lineItem; // store the current line
+    string lineItem;   // store the current line
     string seriesName; // for using in the dictionary
-    Episode episode; // construct the read episode
+    Episode episode;   // construct the read episode
 
     getline(ss, lineItem, colDelimeter); // reading the id
     episode.setID(lineItem);
@@ -117,7 +117,7 @@ void Database::readEpisodes() {
     episode.setDuration(stoi(lineItem));
 
     getline(ss, lineItem, colDelimeter); // reading the line of the ratings
-    stringstream ratingStream(lineItem); // create 
+    stringstream ratingStream(lineItem); // create
     string rating;
     while (getline(ratingStream, rating, ratingDelimeter)) {
       episode.addRating(stoi(rating));
@@ -126,7 +126,7 @@ void Database::readEpisodes() {
       throw runtime_error("The series " + seriesName + " does not exist.");
     }
     // serie must exist at this point
-    EpisodesDict& seriesEpisodes = series.at(seriesName).getEpisodes();
+    EpisodesDict &seriesEpisodes = series.at(seriesName).getEpisodes();
     cout << endl;
 
     seriesEpisodes.emplace(episode.getTitle(), episode);
@@ -136,15 +136,82 @@ void Database::readEpisodes() {
 
 void Database::displayMovies() {
   cout << "------ Movies ------" << endl;
-  for (auto& movie : movies) {
+  for (auto &movie : movies) {
     movie.second.displayInformation();
   }
 }
 
 void Database::displaySeries() {
   cout << "------ Series ------" << endl;
-  for (auto& serie : series) {
+  for (auto &serie : series) {
     serie.second.displayInformation();
   }
 }
 
+void Database::searchMovie() {
+  // Read the title from the user
+  string title = System::askForInput("Enter the title of the movie: ");
+
+  if (!movieExists(title)) {
+    cout << "The movie " << title << " does not exist." << endl;
+    return;
+  }
+  movies.at(title).displayInformation();
+}
+
+void Database::searchSeries() {
+  // Read the title from the user
+  string title = System::askForInput("Enter the title of the series: ");
+
+  if (!seriesExists(title)) {
+    cout << "The series " << title << " does not exist." << endl;
+    return;
+  }
+  series.at(title).displayInformation();
+}
+
+void Database::rateMovie() {
+     // Read the title from the user
+     string title = System::askForInput("Enter the title of the movie: ");
+
+     // Check if it exists.
+    if (!movieExists(title)) { 
+        // If the movie does not exist, alert the user and abort execution
+        cout << "The movie " << title << " does not exist." << endl << endl;
+        return;
+    }
+
+    // Read the rating from the user
+    int rating = System::askForInput(1, 5, "Enter the rating (1-5): ");
+    // Modify the value of the movie in the dictionary
+    this->movies.at(title).addRating(rating);
+
+    // Register new data to the file
+}
+
+void Database::rateSeries(){
+  string title = System::askForInput("Enter the title of the series: ");
+
+  if(!seriesExists(title)){
+    cout << "The series " << title << " does not exist." << endl << endl;
+    return;
+  }
+
+  int rating = System::askForInput(1, 5, "Enter the rating (1-5): ");
+
+  this->series.at(title).addRating(rating);
+}
+void Database::rateEpisode(){
+  string title_series = System::askForInput("Enter the title of the series the episode is from: ");
+  if(!seriesExists(title_series)){
+    cout << "The series " << title_series << " does not exist." << endl << endl;
+    return;
+  }
+  string title_episode = System::askForInput("Enter the title of the episode: ");
+  if (!series.at(title_series).episodeExists(title_episode)){
+    cout << "The episode " << title_episode << " does not exist in the series " <<title_series<<endl << endl;
+    return;
+  }
+  int rating = System::askForInput(1, 5, "Enter the rating (1-5): ");
+  this->series.at(title_series).rateEpisode(title_episode,rating);
+}

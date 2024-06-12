@@ -1,5 +1,13 @@
 #include "Series.h"
 
+bool Series:: episodeExists(string title){
+    return episodes.find(title) != episodes.end();
+}
+
+void Series::rateEpisode(string name, int rating){
+    episodes.at(name).addRating(rating);
+}
+
 void Series::displayInformation() {
     const string title = "Title: " + this->title + " (" + this->id + ")";
     cout.precision(2);

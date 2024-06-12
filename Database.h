@@ -1,11 +1,12 @@
 #include "Episode.h"
 #include "Movie.h"
 #include "Series.h"
+#include "System.h"
 #include <iostream>
 #include <unordered_map>
 
 using namespace std;
-using MovieDict = unordered_map<string, Movie>; 
+using MovieDict = unordered_map<string, Movie>;
 using SeriesDict = unordered_map<string, Series>;
 using PlayableDict = unordered_map<string, Playable>;
 
@@ -29,6 +30,11 @@ public:
 
   void displayMovies();
   void displaySeries();
+  void searchMovie();
+  void searchSeries();
+  void rateMovie();
+  void rateSeries();
+  void rateEpisode();
 };
 
 #endif
