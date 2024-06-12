@@ -23,11 +23,11 @@ public:
   void setDuration(float duration);
   void addRating(int rating);
 
-  const string getID();
-  const string getTitle();
-  const string getGenre();
-  const int getDuration();
-  const vector<int> getRatings();
+  string getID() const;
+  string getTitle() const;
+  string getGenre() const;
+  int getDuration() const;
+  vector<int> getRatings() const;
 };
 
 #endif

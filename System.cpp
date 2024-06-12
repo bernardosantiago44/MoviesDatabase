@@ -8,13 +8,10 @@ System::System() {
 
   // Initialize the array of function pointers
   // in the same order of appearance as the menu
-  functions[0] =
-      &Database::displayMovies; // Pointer to the function displayMovies
-  functions[1] =
-      &Database::displaySeries; // Pointer to the function displaySeries
+  functions[0] = &Database::displayMovies; // Pointer to the function displayMovies
+  functions[1] = &Database::displaySeries; // Pointer to the function displaySeries
   functions[2] = &Database::searchMovie; // Pointer to the function searchMovie
-  functions[3] =
-      &Database::searchSeries;         // Pointer to the function searchSeries
+  functions[3] = &Database::searchSeries;         // Pointer to the function searchSeries
   functions[4] = &Database::rateMovie; // Pointer to the function rateMovie
   functions[5] = &Database::rateSeries; // Pointer to the function rateSeries
   functions[6] = &Database::rateEpisode; // Pointer to the function rateEpisode
@@ -73,6 +70,7 @@ void System::run() {
 
     if (input == 8) {
       cout << "Thank you for using the program.\n";
+      this->database->writeMovies();
       break;
     }
 
