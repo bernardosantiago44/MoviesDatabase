@@ -217,7 +217,7 @@ void Database::rateEpisode(){
     this->series.at(title_series).rateEpisode(title_episode,rating);
 }
 
-bool Database::writeToDatabase(const Movie& movie) const {
+bool Database::writeToDatabase(const Movie& movie) {
     ofstream file(this->directory + "movies.txt", ios::app);
 
     if (!file.is_open()) {
@@ -238,17 +238,80 @@ bool Database::writeToDatabase(const Movie& movie) const {
     return true;
 }
 
+bool Database::writeToDatabase(const Series& series) {
+    ofstream file(this->directory + "series.txt", ios::app);
+
+    if (!file.is_open()) {
+        cout << "Could not write " + series.getTitle() + " to database\n";
+        return false;
+    }
+
+    file << series.getID()    << ";";
+    file << series.getTitle() << ";";
+    file << series.getGenre() << ";";
+    for (int rating : series.getRatings()) {
+        file << rating << ",";
+    }
+    file << endl;
+    file.close();
+    return true;
+}
+
+bool Database::writeToDatabase(const Episode& episode) {
+    ofstream file(this->directory + "episodes.txt", ios::app);
+
+    if (!file.is_open()) {
+        cout << "Could not open database file\n";
+        return false;
+    }
+
+    file << episode.getID()    << ";";
+    file << episode.getSeriesName() << ";";
+    file << episode.getTitle() << ";";
+    file << episode.getSeason() << ";";
+    file << episode.getDuration() << ";";
+
+    for (int rating : episode.getRatings()) {
+        file << rating << ",";
+    }
+
+    file << endl;
+    file.close();
+    return true;
+}
+
 void Database::resetFile(string filename) const {
     ofstream file(this->directory + filename, ios::trunc);
     file << "";
     file.close();
 }
 
-void Database::writeMovies() const {
+void Database::writeMovies() {
     resetFile("movies.txt");
     for (auto iterator = movies.begin(); iterator != movies.end(); iterator++) {
         if(!writeToDatabase(iterator->second)) {
             throw("Could not write " + iterator->second.getTitle() + " to database\n");
+        }
+    }
+}
+
+void Database::writeSeries() {
+    // clear the file to work in
+    resetFile("series.txt");
+    resetFile("episodes.txt");
+    // iterate through the series dictionary
+    for (auto iterator = series.begin(); iterator != series.end(); iterator++) {
+        if(!writeToDatabase(iterator->second)) {
+            throw("Could not write " + iterator->second.getTitle() + " to database\n");
+        }
+        // For each of the series, iterate through the episodes
+        EpisodesDict &seriesEpisodes = iterator->second.getEpisodes();
+        for (auto episodesIter = seriesEpisodes.begin(); episodesIter != seriesEpisodes.end(); episodesIter++) {
+            // Now attempt to write the episodes to the file, 
+            // but without reseting this time
+            if(!writeToDatabase(episodesIter->second)) {
+                throw("Could not write " + episodesIter->second.getTitle() + " to database\n");
+            }
         }
     }
 }

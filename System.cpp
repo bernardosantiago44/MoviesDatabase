@@ -53,11 +53,11 @@ int System::askForInput(int from, int to, string message) {
 }
 
 string System::askForInput(string message) {
-  string input;
-  cout << message;
-  cin.ignore(); // Ignore any previous newline character
-  getline(cin, input);
-  return input;
+    string input;
+    cout << message;
+    cin.ignore(); // Ignore any previous newline character
+    getline(cin, input);
+    return input;
 }
 
 void System::run() {
@@ -70,7 +70,12 @@ void System::run() {
 
     if (input == 8) {
       cout << "Thank you for using the program.\n";
-      this->database->writeMovies();
+      try {
+          this->database->writeMovies();
+          this->database->writeSeries();
+      } catch (string e) {
+          cout << e;
+      }
       break;
     }
 

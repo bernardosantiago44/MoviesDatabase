@@ -22,9 +22,9 @@ private:
   bool movieExists(string title);
   bool seriesExists(string title);
 
-  bool writeToDatabase(const Movie &movie) const;
-  bool writeToDatabase(const Series &series) const;
-  bool writeToDatabase(const Episode &episode) const;
+  bool writeToDatabase(const Movie &movie);
+  bool writeToDatabase(const Series &series);
+  bool writeToDatabase(const Episode &episode);
 
   void resetFile(string filename) const;
 
@@ -42,7 +42,8 @@ public:
   void rateSeries();
   void rateEpisode();
 
-  void writeMovies() const;
+  void writeMovies();
+  void writeSeries();
 };
 
 #endif

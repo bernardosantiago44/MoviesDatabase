@@ -20,6 +20,14 @@ void Episode::setSeason(unsigned int season) {
   this->season = season;
 }
 
+string Episode::getSeriesName() const {
+  return this->seriesName;
+}
+
+unsigned short int Episode::getSeason() const {
+  return this->season;
+}
+
 void Episode::displayInformation() {
   cout.precision(2);
   cout << "\tEpisode title: " << this->title << endl;
