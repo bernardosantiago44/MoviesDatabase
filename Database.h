@@ -3,12 +3,12 @@
 #include "Series.h"
 #include "System.h"
 #include <iostream>
-#include <unordered_map>
+#include <map>
 
 using namespace std;
-using MovieDict = unordered_map<string, Movie>;
-using SeriesDict = unordered_map<string, Series>;
-using PlayableDict = unordered_map<string, Playable>;
+using MovieDict = map<string, Movie>;
+using SeriesDict = map<string, Series>;
+using PlayableDict = map<string, Playable>;
 
 #ifndef DATABASE_H
 #define DATABASE_H
@@ -21,6 +21,12 @@ private:
 
   bool movieExists(string title);
   bool seriesExists(string title);
+
+  bool writeToDatabase(const Movie &movie);
+  bool writeToDatabase(const Series &series);
+  bool writeToDatabase(const Episode &episode);
+
+  void resetFile(string filename) const;
 
 public:
   Database(string directory);
@@ -35,6 +41,9 @@ public:
   void rateMovie();
   void rateSeries();
   void rateEpisode();
+
+  void writeMovies();
+  void writeSeries();
 };
 
 #endif

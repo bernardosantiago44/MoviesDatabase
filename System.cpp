@@ -8,13 +8,10 @@ System::System() {
 
   // Initialize the array of function pointers
   // in the same order of appearance as the menu
-  functions[0] =
-      &Database::displayMovies; // Pointer to the function displayMovies
-  functions[1] =
-      &Database::displaySeries; // Pointer to the function displaySeries
+  functions[0] = &Database::displayMovies; // Pointer to the function displayMovies
+  functions[1] = &Database::displaySeries; // Pointer to the function displaySeries
   functions[2] = &Database::searchMovie; // Pointer to the function searchMovie
-  functions[3] =
-      &Database::searchSeries;         // Pointer to the function searchSeries
+  functions[3] = &Database::searchSeries;         // Pointer to the function searchSeries
   functions[4] = &Database::rateMovie; // Pointer to the function rateMovie
   functions[5] = &Database::rateSeries; // Pointer to the function rateSeries
   functions[6] = &Database::rateEpisode; // Pointer to the function rateEpisode
@@ -56,11 +53,11 @@ int System::askForInput(int from, int to, string message) {
 }
 
 string System::askForInput(string message) {
-  string input;
-  cout << message;
-  cin.ignore(); // Ignore any previous newline character
-  getline(cin, input);
-  return input;
+    string input;
+    cout << message;
+    cin.ignore(); // Ignore any previous newline character
+    getline(cin, input);
+    return input;
 }
 
 void System::run() {
@@ -73,6 +70,12 @@ void System::run() {
 
     if (input == 8) {
       cout << "Thank you for using the program.\n";
+      try {
+          this->database->writeMovies();
+          this->database->writeSeries();
+      } catch (string e) {
+          cout << e;
+      }
       break;
     }
 

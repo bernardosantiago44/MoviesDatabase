@@ -30,6 +30,22 @@ void Playable::addRating(int rating) {
   this->ratings.push_back(rating);
 }
 
-string Playable::getTitle() {
+string Playable::getTitle() const {
   return this->title;
+}
+
+string Playable::getGenre() const {
+  return this->genre;
+}
+
+string Playable::getID() const {
+  return this->id;
+}
+
+int Playable::getDuration() const {
+  return this->duration;
+}
+
+vector<int> Playable::getRatings() const {
+  return this->ratings;
 }
