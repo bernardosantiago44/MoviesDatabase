@@ -54,8 +54,8 @@ int System::askForInput(int from, int to, string message) {
 
 string System::askForInput(string message) {
     string input;
-    cout << message;
     cin.ignore(); // Ignore any previous newline character
+    cout << message;
     getline(cin, input);
     return input;
 }
